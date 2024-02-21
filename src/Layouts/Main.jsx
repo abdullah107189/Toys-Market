@@ -23,21 +23,14 @@ const Main = () => {
     return (
         <div >
             <Loading></Loading>
-            {/* {status === true ? */}
-                {/* <div>
-                    <p className='flex justify-center items-center h-screen'>
-                        Your Offline
-                    </p>
-                </div>
-                : */}
-                <div className='container mx-auto py-3 relative'>
-                    <Toaster
-                        position="top-right"
-                        reverseOrder={false}
-                    />
-                    <Navber></Navber>
-                    <Outlet></Outlet>
-                </div>
+            <Navber></Navber>
+            <div className='container mx-auto'>
+                <Toaster
+                    position="top-right"
+                    reverseOrder={false}
+                />
+                <Outlet></Outlet>
+            </div>
             {/* } */}
         </div >
     );

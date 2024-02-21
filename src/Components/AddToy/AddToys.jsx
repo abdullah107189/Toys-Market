@@ -46,7 +46,7 @@ const AddToys = () => {
             .then(data => {
                 if (data.acknowledged === true) {
                     toast.success('Toy Added Successfully Done ')
-                    navigate('/')
+                    navigate('/my-toys')
                 }
             })
     }
@@ -92,7 +92,7 @@ const AddToys = () => {
                         <input className='rounded-lg w-full p-2' type="number" name="quantity" placeholder='Enter product quantity' required />
                     </div>
                     <div className='col-span-2'>
-                        <textarea onChange={(e) => setDes(e.target.value)} className='rounded-lg w-full p-2 ' id="comment" name="description" placeholder="Write toy description here..." required></textarea>
+                        <textarea rows={4} onChange={(e) => setDes(e.target.value)} className='rounded-lg w-full p-2 ' id="comment" name="description" placeholder="Write toy description here..." required></textarea>
                     </div>
                     <button type='submit' className='font-bold w-full btn col-span-2'>Add Toy</button>
                 </form>

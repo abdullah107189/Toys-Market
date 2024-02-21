@@ -8,6 +8,9 @@ import AddToys from "../Components/AddToy/AddToys";
 import Error from "../Error";
 import Login from "../Components/Form/Login";
 import Registretion from "../Components/Form/Registetion";
+import My_Toys_View from "../Components/MyToys/My_Toys_View";
+import My_Toys_Update from "../Components/MyToys/My_Toys_Update";
+import PriveteRoute from "../Route/PriveteRoute";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -23,11 +26,11 @@ const router = createBrowserRouter([
             },
             {
                 path: 'my-toys',
-                element: <MyToys></MyToys>,
+                element: <PriveteRoute><MyToys></MyToys></PriveteRoute>,
             },
             {
                 path: 'add-toy',
-                element: <AddToys></AddToys>
+                element: <PriveteRoute> <AddToys></AddToys></PriveteRoute>
             },
             {
                 path: 'login',
@@ -36,6 +39,21 @@ const router = createBrowserRouter([
             {
                 path: 'reg',
                 element: <Registretion></Registretion>
+            },
+            {
+                path: 'toy-view/:id',
+                element: <My_Toys_View></My_Toys_View>,
+                loader: ({ params }) => fetch(`http://localhost:5000/myToys/${params.id}`)
+            },
+            {
+                path: 'my-toy-view/:id',
+                element: <My_Toys_View></My_Toys_View>,
+                loader: ({ params }) => fetch(`http://localhost:5000/myToys/${params.id}`)
+            },
+            {
+                path: 'my-toy-update/:id',
+                element: <My_Toys_Update></My_Toys_Update>,
+                loader: ({ params }) => fetch(`http://localhost:5000/myToys/${params.id}`)
             },
             {
                 path: '*',

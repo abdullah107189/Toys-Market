@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ToysTableRow = ({ toyData, index }) => {
     const { _id, photo, toy_Name, user_email, user_name, category, price, reating, quantity, description } = toyData;
@@ -35,7 +36,9 @@ const ToysTableRow = ({ toyData, index }) => {
                 <p>{quantity}</p>
             </td>
             <td>
-                <button onClick={() => handleView(_id)} className='font-bold btn'>View</button>
+                <Link to={`/toy-view/${_id}`}>
+                    <button onClick={() => handleView(_id)} className='font-bold btn'>View</button>
+                </Link>
             </td>
         </tr>
     );

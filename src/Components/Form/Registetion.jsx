@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import useTitle from '../../Hooks/TitleHooks';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { authContext } from '../../Provider/AuthProvider';
 import { updateProfile } from 'firebase/auth';
 import toast from 'react-hot-toast';
 const Registretion = () => {
     useTitle('Registretion')
     const { createUser } = useContext(authContext)
+    const navigate = useNavigate()
     const handleLogin = (e) => {
         e.preventDefault()
         const form = e.target;
@@ -27,6 +28,7 @@ const Registretion = () => {
                 console.log(loggedUser)
                 updatePhotoAndName(loggedUser, name, photoURL)
                 form.reset()
+                navigate('/')
             })
             .catch((error) => {
                 const errorMessage = error.message;

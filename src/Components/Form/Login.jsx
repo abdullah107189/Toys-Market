@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import useTitle from '../../Hooks/TitleHooks';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { authContext } from '../../Provider/AuthProvider';
 const Login = () => {
     useTitle('Login')
     const { loginUser } = useContext(authContext)
+    const naviget = useNavigate()
     const handleLogin = (e) => {
         e.preventDefault()
         const form = e.target;
@@ -15,6 +16,7 @@ const Login = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
                 form.reset()
+                naviget('/')
             })
             .catch((error) => {
                 const errorMessage = error.message;

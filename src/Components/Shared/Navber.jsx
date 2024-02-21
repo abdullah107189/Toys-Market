@@ -3,8 +3,18 @@ import toyImg from '../../../public/toy-shop.png'
 import UserImg from '../../../public/user-interface.png'
 import { Link } from 'react-router-dom';
 import { authContext } from '../../Provider/AuthProvider';
+import toast from 'react-hot-toast';
 const Navber = () => {
-    const { user } = useContext(authContext)
+    const { user, LogOut } = useContext(authContext)
+    const handleLogOut = async () => {
+        try {
+            await LogOut();
+            toast.success('Log Out successfully done !');
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+
     return (
         <div className='flex justify-between items-center'>
             <Link to={'/'} className='flex gap-3 items-center'>
@@ -25,12 +35,12 @@ const Navber = () => {
 
             <div className="dropdown dropdown-bottom dropdown-end">
                 <div tabIndex={0} role="button" className="hover:bg-slate-400 transform duration-300 rounded-full">
-                    <img className='w-14 p-1 rounded-full' src={user ? user.photoURL : UserImg} alt='user Img' title={user?.displayName} />
+                    <img className='w-16 p-1 rounded-full' src={user ? user.photoURL : UserImg} alt='user Img' title={user?.displayName} />
                 </div>
                 {
                     user ?
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow-lg bg-base-100 rounded-box w-52">
-                            <li><button>Log Out</button></li>
+                            <li><button onClick={handleLogOut}>Log Out</button></li>
                         </ul>
                         :
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">

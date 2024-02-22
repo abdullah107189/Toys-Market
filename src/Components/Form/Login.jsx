@@ -8,7 +8,6 @@ const Login = () => {
     const navigate = useNavigate()
     const location = useLocation()
     let from = location.state?.from?.pathname || "/";
-    console.log('from', from, "location", location)
     const handleLogin = (e) => {
         e.preventDefault()
         const form = e.target;

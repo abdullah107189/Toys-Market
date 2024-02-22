@@ -26,7 +26,7 @@ const MyToys = () => {
         } else {
             setLoading(false);
         }
-    }, [user]); // Only re-fetch data when user object changes
+    }, [user]);
     const handleDelete = (id) => {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -73,6 +73,26 @@ const MyToys = () => {
 
     }
 
+    // sort
+    const handleSortToys = (event) => {
+        const value = event.target.value;
+        if (value == "null") {
+            return loadData;
+        } else if (value === "priceLowToHigh") {
+            const sortedToys = [...loadData].sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+            setLoadData(sortedToys);
+        } else if (value === "priceHighToLow") {
+            const sortedToys = [...loadData].sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+            setLoadData(sortedToys);
+        }
+        else if (value === "alphabetically_A_Z") {
+            const sortedToys = [...loadData].sort((a, b) => a.toy_Name.localeCompare(b.toy_Name));
+            setLoadData(sortedToys);
+        } else if (value === "alphabetically_Z_A") {
+            const sortedToys = [...loadData].sort((a, b) => b.toy_Name.localeCompare(a.toy_Name));
+            setLoadData(sortedToys);
+        }
+    };
     return (
         <div>
             {loading ? (
@@ -82,6 +102,16 @@ const MyToys = () => {
             ) : (
                 <div>
                     <h1 className='text-3xl font-semibold text-center my-4'>This is my Added Toys</h1>
+                    <select
+                        onChange={handleSortToys}
+                        className="select select-bordered w-full max-w-xs"
+                    >
+                        <option value="null">Sort By</option>
+                        <option value="priceLowToHigh">Price, low to high</option>
+                        <option value="priceHighToLow">Price, hight to low</option>
+                        <option value="alphabetically_A_Z">Alphabetically, A-Z</option>
+                        <option value="alphabetically_Z_A">Alphabetically, Z-A</option>
+                    </select>
                     <table className="table">
                         <thead>
                             <tr>

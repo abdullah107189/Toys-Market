@@ -1,5 +1,4 @@
 import { createBrowserRouter, } from "react-router-dom";
-import App from "../App";
 import Main from "../Layouts/Main";
 import Home from "../Components/Home";
 import AllToys from "../Components/AllToys/AllToys";
@@ -18,13 +17,15 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home></Home>
+                element: <Home></Home>,
+                loader: () => fetch('http://localhost:5000/allToys')
             },
             {
                 path: 'all-toys',
-                element: <AllToys></AllToys>,
+                element: <AllToys />,
                 loader: () => fetch('http://localhost:5000/totalToys')
             },
+
             {
                 path: 'my-toys',
                 element: <PriveteRoute><MyToys></MyToys></PriveteRoute>,

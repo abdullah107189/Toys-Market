@@ -3,6 +3,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import Navber from '../Components/Shared/Navber';
 import { Outlet } from 'react-router-dom';
 import Loading from '../Components/Loading';
+import Footer from '../Components/Shared/Footer';
 
 const Main = () => {
     // const [status, setStatus] = useState(false)
@@ -21,7 +22,7 @@ const Main = () => {
     //     }
     // }, [])
     return (
-        <div >
+        <div className=''>
             <Loading></Loading>
             <Navber></Navber>
             <div className='container mx-auto'>
@@ -31,7 +32,7 @@ const Main = () => {
                 />
                 <Outlet></Outlet>
             </div>
-            {/* } */}
+            <Footer></Footer>
         </div >
     );
 };

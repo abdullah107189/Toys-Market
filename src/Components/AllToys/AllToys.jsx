@@ -20,14 +20,22 @@ const AllToys = () => {
     }, []);
 
     // serch page 
-    const search = (e) => {
+    const search = async (e) => {
         e.preventDefault();
         const searchTerm = e.target.sarchTerm.value;
         if (searchTerm) {
-            const result = filterData.filter(toy => toy.toy_Name.toLowerCase().includes(searchTerm.toLowerCase()));
+            const response = await fetch(`http://localhost:5000/allToys?page=${currentPage}&limit=${itemsPerPage}`);
+            const jsonData = response.json();
+            // setToysData(jsonData);
+            // setFilterData(toysData);
+            setLoading(false)
+            const result = jsonData.filter(toy => toy.toy_Name.toLowerCase().includes(searchTerm.toLowerCase()));
             setToysData(result);
         }
     }
+
+
+
 
     // pagination
     const [currentPage, setCurrentPage] = useState(0)
@@ -54,6 +62,7 @@ const AllToys = () => {
         fetchData();
     }, [currentPage, itemsPerPage]);
 
+
     // active class 
     const [isActive, setIsActive] = useState(false);
 
@@ -71,7 +80,7 @@ const AllToys = () => {
                 </div>
                 :
                 <div>
-                    <div className='bg-white md:top-16 top-[70px] sticky z-10 '>
+                    <div className='bg-white md:top-16 top-[70px] sticky z-10'>
                         <form onSubmit={search} className='flex w-2/3 mx-auto my-3 '>
                             <input
                                 className='border w-full px-4 py-2 rounded-l-lg border-r-0 focus:outline-none'
@@ -116,7 +125,7 @@ const AllToys = () => {
                                 <button
                                     key={number}
                                     className={number === currentPage ? 'active btn btn-primary' : 'btn'}
-                                    
+
                                     onClick={() => setCurrentPage(number)}
                                 >{number + 1}</button>
                             ))}

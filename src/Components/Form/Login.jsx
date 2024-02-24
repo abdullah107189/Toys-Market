@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import useTitle from '../../Hooks/TitleHooks';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { authContext } from '../../Provider/AuthProvider';
@@ -15,8 +15,21 @@ const Login = () => {
         const pass = form.pass.value;
         loginUser(email, pass)
             .then((result) => {
-                const loggedUser = result.user;
-                console.log(loggedUser)
+                const user = result.user;
+                const loggedUser = {
+                    email: user.email
+                }
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(loggedUser)
+                })
+                    .then(res => res.json())
+                    .then(data =>
+                        localStorage.setItem('toy-access-token', data.token))
+             
                 form.reset()
                 navigate(from, { replace: true })
             })

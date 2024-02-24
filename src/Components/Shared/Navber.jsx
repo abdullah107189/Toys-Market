@@ -8,12 +8,14 @@ const Navber = () => {
     const { user, LogOut } = useContext(authContext)
     const handleLogOut = async () => {
         try {
-            await LogOut();
-            toast.success('Log Out successfully done !');
+            await LogOut(); // Wait for LogOut() to complete
+            localStorage.removeItem('toy-access-token'); // Remove item from local storage
+            toast.success('Log Out successfully done !'); // Show success message
         } catch (error) {
-            console.error(error.message);
+            console.error(error.message); // Log any errors
         }
     }
+
 
     return (
         <div className="bg-gradient-to-r from-green-200 via-stone-400 to-blue-200  z-10 sticky top-0">
@@ -38,17 +40,19 @@ const Navber = () => {
                     <div tabIndex={0} role="button" className="hover:bg-slate-400 transform duration-300 rounded-full">
                         <img className='w-16 p-1 rounded-full' src={user ? user.photoURL : UserImg} alt='user Img' title={user?.displayName} />
                     </div>
-                    {
-                        user ?
-                            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow-lg bg-base-100 rounded-box w-52">
-                                <li><button onClick={handleLogOut}>Log Out</button></li>
-                            </ul>
-                            :
-                            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                <li><Link to={'/login'}>Login</Link></li>
-                                <li><Link to={'/reg'}>Register</Link></li>
-                            </ul>
-                    }
+                    <div className='z-30 relative'>
+                        {
+                            user ?
+                                <ul tabIndex={0} className="dropdown-content  menu p-2 shadow-lg bg-base-100 rounded-box w-52">
+                                    <li><button className='' onClick={handleLogOut}>Log Out</button></li>
+                                </ul>
+                                :
+                                <ul tabIndex={0} className="dropdown-content z-50 menu p-2 shadow bg-base-100 rounded-box w-52">
+                                    <li><Link to={'/login'}>Login</Link></li>
+                                    <li><Link to={'/reg'}>Register</Link></li>
+                                </ul>
+                        }
+                    </div>
                 </div>
             </div >
         </div>

@@ -1,0 +1,18 @@
+.bg-cover {
+    background-size: center;
+    height: calc(100vh - 4rem);
+    background-repeat: no-repeat;
+    background-position: center;
+    /* object-fit: cover;
+    object-position: center;  */
+}
+
+/* .bg-m-cover {
+    height: calc(30vh - 2rem);
+    object-position: center;
+    object-fit: cover;
+} */
+
+.texth1 {
+    color: blue;
+}
